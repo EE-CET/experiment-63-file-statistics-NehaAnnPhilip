@@ -14,17 +14,20 @@ public class FileStats {
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
             
-            // TODO: Read the file line by line until it returns null
+            // Read the file line by line until it returns null
             while ((line = reader.readLine()) != null) {
-                // TODO: Increment lineCount
+                // Increment lineCount for every non-null line read
+                lineCount++;
                 
-                // TODO: Add the length of the current line to charCount
+                // Add the length of the current line to charCount
+                // readLine() automatically excludes newline characters
+                charCount += line.length();
                 
-                // TODO: Split the line into words using split("\\s+") and add the length of the resulting array to wordCount
-                // Hint: Check if the line is not empty before splitting to avoid counting empty strings!
+                // Split the line into words and count them
+                // We trim to remove leading/trailing whitespace before splitting
                 if (!line.trim().isEmpty()) {
                     String[] words = line.trim().split("\\s+");
-                    // Add words.length to wordCount
+                    wordCount += words.length;
                 }
             }
             
@@ -33,7 +36,7 @@ public class FileStats {
             return;
         }
 
-        // Output the results
+        // Output the results in the required format
         System.out.println("Lines: " + lineCount);
         System.out.println("Words: " + wordCount);
         System.out.println("Characters: " + charCount);
